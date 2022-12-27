@@ -23,11 +23,14 @@ app.use(sassMiddleware({
     prefix: '/css'
 }));
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+
+// make the upload path available to browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(expressLayouts);
 
@@ -49,7 +52,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (1000*60*100)
+        maxAge: (1000 * 60 * 100)
     },
     store: MongoStore.create(
         {

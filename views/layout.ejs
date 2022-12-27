@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>
@@ -5,6 +6,9 @@
         </title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
         <link rel="stylesheet" href="/css/layout.css" />
         <link rel="stylesheet" href="/css/header.css" />
         <link rel="stylesheet" href="/css/footer.css" />
@@ -13,12 +17,6 @@
 
     <body>
         <%- include('_header'); %>
-        
-        <!-- <% if(flash.success && flash.success.length > 0){ %>
-            <h5>
-                <%= flash.success %>
-            </h5>
-        <% } %> -->
 
         <main id="layout-main">
             <%- body %>
