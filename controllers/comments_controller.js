@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const commentsMailer = require('../mailers/comments_mailer');
 
 module.exports.create = async function(req, res){
     try{
@@ -14,11 +15,12 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);
             post.save();
     
-            if (req.xhr){
-                // comment = await comment.populate('user', 'name').execPopulate();        // .execPopulate() has been removed in mongosse v6.x
+            // comment = await comment.populate('user', 'name').execPopulate();        // .execPopulate() has been removed in mongosse v6.x
+            comment = await comment.populate({path: 'user', select: 'name email'});
+            
+            commentsMailer.newComment(comment);
 
-                comment = await comment.populate({path: 'user', select: 'name'});
-                
+            if (req.xhr){
                 return res.status(200).json({
                     data: {
                         comment: comment
